@@ -1,79 +1,41 @@
 
-# CloudForge Architecture
+# CloudForge Deployment Guide
 
-## 1. Project Overview
+## 1. Home Frontend
 
-CloudForge is a private personal development console for managing Cloudflare resources.
+- Cloudflare Pages project: `cloudforge-home`
+- Repository: `cloudforge`
+- Root directory: `apps/home`
+- Build command: leave empty for the current static frontend.
+- Build output directory: `.`
 
-The system uses multiple independently deployed websites and a shared API service.
+## 2. API Worker
 
-## 2. Deployment Architecture
+- Worker name: `cloudforge-api`
+- Entry point: `services/api/src/index.js`
+- Keep the currently deployed health-check implementation until a replacement has been tested.
 
-- `apps/home`: main dashboard and navigation.
-- `services/api`: shared backend Worker.
-- `apps/admin`: future project management interface.
-- `apps/code`: future code editing interface.
-- `apps/data`: future database and storage management interface.
-- `apps/deploy`: future deployment management interface.
-- `packages/ui`: shared UI components.
-- `packages/api-client`: shared API client.
-- `packages/shared`: shared utilities and constants.
-- `docs`: project documentation.
+## 3. Deployment Verification
 
-## 3. Core Principles
+1. Open the deployed Home website.
+2. Confirm the dashboard loads.
+3. Enter the API Worker base URL in the API connection setting.
+4. Run the connection check.
+5. Verify that `/api/health` returns a successful JSON response.
 
-- Personal use only.
-- No public user registration.
-- Prefer free Cloudflare services within applicable limits.
-- Keep frontend applications independently deployable.
-- Use one shared backend API for authorized management operations.
-- Never expose Cloudflare API tokens in frontend code.
-- Keep secrets in backend secret storage.
-- Require authentication and authorization for management APIs.
-- Confirm destructive operations before execution.
+## 4. Security Checklist
 
-## 4. Security
+- Verify access protection on the production Home hostname.
+- Verify that unauthorized visitors cannot access protected pages.
+- Require backend authentication for management APIs.
+- Keep Cloudflare API tokens in Worker secrets.
+- Never commit secrets to the repository.
+- Test changes before connecting real resource-management operations.
 
-- Protect the dashboard with Cloudflare Access or an equivalent access-control layer.
-- Validate identity and permissions on the backend.
-- Restrict cross-origin requests to trusted origins where appropriate.
-- Validate all input received by management endpoints.
-- Do not treat a private source repository as website access protection.
-- Do not connect real Cloudflare resource-management tokens until authentication is implemented and tested.
+## 5. Change Management
 
-## 5. Development Stages
-
-### Stage 1: Foundation
-
-- Deploy the Home frontend.
-- Deploy the shared API Worker.
-- Verify the API health endpoint.
-- Complete the initial project structure.
-
-### Stage 2: Access Security
-
-- Configure access protection.
-- Implement backend authentication and authorization.
-- Store secrets securely.
-- Test unauthorized access rejection.
-
-### Stage 3: Resource Management
-
-- List Cloudflare projects.
-- Manage KV, D1, and R2 resources as supported.
-- Add project creation and deployment workflows.
-- Add operation logs and error handling.
-
-### Stage 4: Development Tools
-
-- Add code editing and preview.
-- Add API testing.
-- Add resource data browsing.
-- Add monitoring and diagnostics.
-
-## 6. Current Status
-
-Home, the API Worker, and Cloudflare Pages have been deployed.
-The API health check has succeeded.
-
-Access protection and additional management features remain to be verified or implemented.
+- Make small changes.
+- Commit each completed file.
+- Test after changing the API Worker.
+- Keep a record of deployment changes.
+- Do not overwrite a working deployment without a recovery plan.
