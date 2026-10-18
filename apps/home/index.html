@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131c">
+  <meta name="description" content="CloudForge 私人云端开发工作站">
+  <title>CloudForge · 云端工作站</title>
+  <link rel="stylesheet" href="./assets/style.css">
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="./">
+      <span class="brand-icon">C</span>
+      <span>CloudForge</span>
+    </a>
+
+    <div class="nav-label">工作空间</div>
+    <nav class="navigation" aria-label="主导航">
+      <a class="nav-item active" href="./">
+        <span>◈</span> 工作台
+      </a>
+      <a class="nav-item" href="#projects"><span>▦</span> 项目管理</a>
+      <a class="nav-item" href="#web"><span>▣</span> 网页工坊</a>
+      <a class="nav-item" href="#code"><span>⌘</span> 代码工作区</a>
+      <a class="nav-item" href="#deploy"><span>⇧</span> 部署中心</a>
+      <a class="nav-item" href="#data"><span>▤</span> 数据中心</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="private-label">
+        <span class="status-dot"></span>
+        私人开发工作站
+      </div>
+      <a class="nav-item" href="#settings">⚙ 设置与连接</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="menu-button" id="menuButton"
+        type="button" aria-label="打开导航">☰</button>
+      <div class="breadcrumb">CloudForge / <strong>工作台</strong></div>
+      <span class="version">PHASE 01</span>
+    </header>
+
+    <section class="page-content">
+      <div class="welcome">
+        <div>
+          <div class="eyebrow">YOUR PRIVATE CLOUD WORKSPACE</div>
+          <h1>欢迎回来。</h1>
+          <p>你的项目、代码、数据与部署，从这里开始。</p>
+        </div>
+        <div class="welcome-symbol">C<span>.</span></div>
+      </div>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <div>
+            <h2>工作空间</h2>
+            <p>统一入口，逐步接入独立功能站点。</p>
+          </div>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card" href="#web">
+            <span class="card-icon purple">▣</span>
+            <span class="card-title">网页工坊</span>
+            <span class="card-description">创建网站与页面预览</span>
+            <span class="card-footer">规划中 <span>↗</span></span>
+          </a>
+
+          <a class="project-card" href="#code">
+            <span class="card-icon blue">⌘</span>
+            <span class="card-title">代码工作区</span>
+            <span class="card-description">编辑文件与管理代码</span>
+            <span class="card-footer">规划中 <span>↗</span></span>
+          </a>
+
+          <a class="project-card" href="#deploy">
+            <span class="card-icon green">⇧</span>
+            <span class="card-title">部署中心</span>
+            <span class="card-description">Workers 与 Pages 项目</span>
+            <span class="card-footer">规划中 <span>↗</span></span>
+          </a>
+
+          <a class="project-card" href="#data">
+            <span class="card-icon orange">▤</span>
+            <span class="card-title">数据中心</span>
+            <span class="card-description">D1、KV 与 R2 管理</span>
+            <span class="card-footer">规划中 <span>↗</span></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="connection">
+        <div class="section-heading">
+          <div>
+            <h2>API 连接检测</h2>
+            <p>连接第一阶段的 CloudForge API Worker。</p>
+          </div>
+          <span class="badge" id="apiBadge">尚未检测</span>
+        </div>
+
+        <div class="panel">
+          <label for="apiUrl">API Worker 地址</label>
+          <div class="input-row">
+            <input id="apiUrl" type="url"
+              placeholder="https://你的-api-worker.workers.dev"
+              autocomplete="url">
+            <button id="checkApi" class="primary-button" type="button">
+              检查连接
+            </button>
+          </div>
+          <div class="help-text">
+            填写部署后获得的 API Worker 根地址，不要填写 /api/health。
+          </div>
+          <div class="connection-result" id="apiResult" role="status"
+            aria-live="polite">
+            等待连接检测。
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="deploy">
+        <div class="section-heading">
+          <div>
+            <h2>系统状态</h2>
+            <p>当前阶段的基础设施检查。</p>
+          </div>
+        </div>
+        <div class="status-grid">
+          <div class="status-card">
+            <span class="status-name">Home 前端</span>
+            <strong class="status-value" id="homeStatus">运行中</strong>
+            <span class="status-note">当前页面已加载</span>
+          </div>
+          <div class="status-card">
+            <span class="status-name">API 后端</span>
+            <strong class="status-value" id="apiStatus">未检测</strong>
+            <span class="status-note">需要执行连接检测</span>
+          </div>
+          <div class="status-card">
+            <span class="status-name">资源管理</span>
+            <strong class="status-value">待接入</strong>
+            <span class="status-note">尚未开放管理接口</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section placeholder-section" id="web">
+        <h2>网页工坊</h2>
+        <p>后续接入网站创建、页面编辑、实时预览与发布。</p>
+      </section>
+
+      <section class="section placeholder-section" id="code">
+        <h2>代码工作区</h2>
+        <p>后续接入多文件编辑、代码搜索、备份和版本恢复。</p>
+      </section>
+
+      <section class="section placeholder-section" id="data">
+        <h2>数据中心</h2>
+        <p>后续接入 D1、KV、R2 和其他资源的实际数据管理。</p>
+      </section>
+
+      <section class="section placeholder-section" id="settings">
+        <h2>设置与连接</h2>
+        <p>当前为基础页面。正式使用前还需要完成管理员身份验证与访问保护。</p>
+      </section>
+
+      <footer class="footer">
+        CloudForge · Private Cloud Workspace
+        <span>第一阶段 · 基础架构</span>
+      </footer>
+    </section>
+  </main>
+
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+</body>
+</html>
